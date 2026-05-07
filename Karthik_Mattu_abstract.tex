@@ -1,0 +1,76 @@
+\documentclass[12pt,a4paper]{amsart}
+\usepackage{amscd,amssymb,amsopn,amsmath,amsthm,graphics,amsfonts,enumerate,verbatim,calc}
+%\usepackage[dvips]{graphicx}
+%\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+%\usepackage{showlabels}
+%\input xy
+%\xyoption{all}
+%\pagestyle{empty}
+\textwidth=16cm \textheight=21.2cm \topmargin=0.5cm
+\oddsidemargin=0.8cm \evensidemargin=0.8cm \headheight=15pt
+\headsep=1cm \numberwithin{equation}{section}
+\hyphenation{semi-stable} \emergencystretch=11pt
+\setcounter{page}{10}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\numberwithin{equation}{section}
+\begin{document}
+%\pagenumbering{gobble}
+\title{Distance without Flatness: Metric-Driven Clustering on Spheres, Tori
+and Hyperbolic Spaces}
+\author{Karthik Mattu, Adit Dhall and Thejas Nagesh Gowda}
+\address{Data and Predictive Analytics Center, School of Mathematics and Statistics, College of Science, Rochester Institute of Technology,
+Rochester, NY, USA}
+\email{ km5503@g.rit.edu}
+\address{Data and Predictive Analytics Center, School of Mathematics and Statistics, College of Science, Rochester Institute of Technology,
+Rochester, NY, USA}
+\email{ ad6449@g.rit.edu}
+\address{Data and Predictive Analytics Center, School of Mathematics and Statistics, College of Science, Rochester Institute of Technology,
+Rochester, NY, USA}
+\email{ tl6153@g.rit.edu}
+\maketitle
+
+\noindent The K-means algorithm \cite{L} minimizes the within cluster sum of squared
+Euclidean distances, and its centroid update relies on the linear structure
+of $\mathbb{R}^{n}$. On curved surfaces this assumption breaks and squared
+Euclidean cost no longer reflects the intrinsic separation between points. Here we revisit
+the algorithm under three non Euclidean geometries and study how the choice
+of metric reshapes the resulting clusters. On the sphere $S^{2}$ we use the
+Haversine distance \cite{MJ}, on the flat torus $\mathbb{T}^{2}$ the periodic
+Euclidean metric obtained by reducing coordinate differences modulo $2\pi$
+along each angular direction \cite{dC}, and on the hyperbolic Poincar\'e disk
+$\mathbb{D}$ we use the Poincar\'e metric induced by the conformal factor
+$2/(1-\|x\|^{2})$ on the open unit disk \cite{NK}.
+
+We view this work as a first step toward systematic clustering on non Euclidean
+spaces. The three surfaces studied here represent positive curvature, flat
+periodicity, and negative curvature in their simplest forms, echoing the role
+that curvature plays in shaping geometric analysis on Riemannian configuration
+spaces more broadly \cite{BW}, and the framework extends naturally to product
+manifolds, Stiefel and Grassmann manifolds, spaces of symmetric positive
+definite matrices, and further Riemannian settings encountered in modern data
+analysis \cite{P}.
+
+\begin{thebibliography}{99}
+\bibitem {L} S. Lloyd, {\it Least squares quantization in PCM}, IEEE Trans.
+Inform. Theory {\bf 28} (1982), 129--137.
+\bibitem {MJ} K. V. Mardia and P. E. Jupp, {\it Directional Statistics},
+Wiley, Chichester, 2000.
+\bibitem {dC} M. P. do Carmo, {\it Riemannian Geometry}, Birkh\"auser,
+Boston, 1992.
+\bibitem {NK} M. Nickel and D. Kiela, {\it Poincar\'e embeddings for learning
+hierarchical representations}, Advances in Neural Information Processing
+Systems {\bf 30} (2017), 6338--6347.
+\bibitem {BW} M. Barbosu and T. Wiandt, {\it On the Riemannian geometry of
+the planetary three-body problem}, Romanian Astron. J. {\bf 29} (2019),
+149--156.
+\bibitem {P} X. Pennec, {\it Intrinsic statistics on Riemannian manifolds.
+Basic tools for geometric measurements}, J. Math. Imaging Vis. {\bf 25}
+(2006), 127--154.
+\end{thebibliography}
+\end{document}
