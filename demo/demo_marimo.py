@@ -19,7 +19,18 @@ app = marimo.App(width="full")
 def _imports():
     import sys
     import os
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+    _is_wasm = sys.platform == 'emscripten'
+
+    if _is_wasm:
+        import urllib.request
+        _base = 'https://karthikmattu06-hue.github.io/distance-without-flatness'
+        urllib.request.urlretrieve(f'{_base}/demo_utils.py', '/home/pyodide/demo_utils.py')
+        _THIS_DIR = '/home/pyodide'
+    else:
+        _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    sys.path.insert(0, _THIS_DIR)
 
     import numpy as np
     import matplotlib
@@ -30,14 +41,14 @@ def _imports():
     du.apply_dark_theme()
 
     import marimo as mo
-    return du, mo, np, os, plt
+    return _THIS_DIR, du, mo, np, os, plt
 
 
 # ─── Sphere data (load once) ─────────────────────────────────────────────────
 
 @app.cell
-def _sphere_data(du, np, os, sphere_dataset):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _sphere_data(_THIS_DIR, du, np, os, sphere_dataset):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
 
     _raw, _label, _synth = du.load_sphere_data(_DATA_DIR, dataset=sphere_dataset.value)
 
@@ -78,8 +89,8 @@ def _sphere_data(du, np, os, sphere_dataset):
 # ─── Sphere UI controls ──────────────────────────────────────────────────────
 
 @app.cell
-def _sphere_controls(mo, os, du):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _sphere_controls(_THIS_DIR, mo, os, du):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _candidates = [
         ('USGS Earthquakes (M2.5+, past 30 days)', 'earthquakes', 'earthquakes.csv'),
         ('NASA Meteorite Landings',                 'meteorites',  'meteorites.csv'),
@@ -472,8 +483,8 @@ def _overview(mo):
 # ─── Torus data (load once) ──────────────────────────────────────────────────
 
 @app.cell
-def _torus_data(du, np, os, torus_seed):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _torus_data(_THIS_DIR, du, np, os, torus_seed):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _raw, _label, _simulated = du.load_torus_data(_DATA_DIR, seed=torus_seed.value)
 
     _MAX_N = 200
@@ -779,8 +790,8 @@ PVE and Silhouette are computed using $d_{\text{torus}}$ as the base distance.
 # ─── Hyperbolic data (load once) ─────────────────────────────────────────────
 
 @app.cell
-def _hyp_data(du, np, os, hyp_seed):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _hyp_data(_THIS_DIR, du, np, os, hyp_seed):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _raw, _label, _is_synth = du.load_hyperbolic_data(_DATA_DIR, seed=hyp_seed.value)
 
     _MAX_N = 200
@@ -1067,8 +1078,8 @@ PVE and Silhouette are computed using $d_{\mathbb{H}}$ as the base distance.
 # ─── Feature Space: data (load once) ─────────────────────────────────────────
 
 @app.cell
-def _feat_data(du, np, os, feat_dataset):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _feat_data(_THIS_DIR, du, np, os, feat_dataset):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _raw, _label, _is_synth = du.load_feature_data(_DATA_DIR, dataset=feat_dataset.value)
 
     _MAX_N = 300
@@ -1095,8 +1106,8 @@ def _feat_data(du, np, os, feat_dataset):
 # ─── Feature Space: UI controls ───────────────────────────────────────────────
 
 @app.cell
-def _feat_controls(mo, os, du):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _feat_controls(_THIS_DIR, mo, os, du):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _candidates = [
         ('Palmer Penguins (3 species)', 'penguins', 'penguins.csv'),
         ('Iris (3 species)',            'iris',     'iris.csv'),
@@ -1485,8 +1496,8 @@ PVE and Silhouette are computed using the selected Minkowski distance.
 # ─── Mixed Type: data (load once) ────────────────────────────────────────────
 
 @app.cell
-def _mixed_data(du, np, os):
-    _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+def _mixed_data(_THIS_DIR, du, np, os):
+    _DATA_DIR = os.path.join(_THIS_DIR, 'data')
     _raw, _label, _is_synth = du.load_mixed_data(_DATA_DIR)
 
     _MAX_N = 200
