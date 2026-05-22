@@ -7,6 +7,10 @@ Run:  marimo run  demo/demo_marimo.py
 Edit: marimo edit demo/demo_marimo.py
 """
 
+# /// script
+# dependencies = ["plotly"]
+# ///
+
 import marimo
 
 __generated_with = "0.13.0"
