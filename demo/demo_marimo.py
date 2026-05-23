@@ -2608,13 +2608,7 @@ def _layout(
         "⚠️ Pitfalls":    pitfalls_content,
     })
 
-    layout = mo.vstack([
-        tabs,
-        mo.md(
-            "---\n"
-            "*MAA Seaway Section · Spring 2026 · St. John Fisher University, Rochester NY*"
-        ),
-    ])
+    layout = mo.vstack([tabs])
 
     return layout, tabs
 
